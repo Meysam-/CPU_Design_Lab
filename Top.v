@@ -73,8 +73,8 @@ module Top(
 
 
 //assign o_DIPLatch = 1'bz;
-assign o_SEGData = 1'bz;
-assign o_SEGLatc = 1'bz;
+//assign o_SEGData = 1'bz;
+//assign o_SEGLatc = 1'bz;
 assign o_LCDData = 1'bz;
 assign o_LCDLatch = 1'bz;
 
@@ -135,14 +135,20 @@ ClockGen clock_gen(
 	 
 assign o_PSCLK = clk_5;
 
-/**/
+SevenSegDriver seven_seg(
+	.bin(led),
+   .clk(clk_5),
+   .seg_data(o_SEGData),
+   .seg_latch(o_SEGLatch)
+	);
+
 dipReader dipReader(
 	.clk(clk_5),
 	.DIP_in(i_DIPData),
 	.DIP_data(led),
 	.DIP_latch(o_DIPLatch)
 	);
-/**/	
+
 
 LED_driver ledDriver(
 	.clk(clk_5),
