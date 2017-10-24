@@ -1,4 +1,0 @@
-verilog work "ipcore_dir/ClockGen.v"
-verilog work "LED_driver.v"
-verilog work "dipReader.v"
-verilog work "Top.v"
