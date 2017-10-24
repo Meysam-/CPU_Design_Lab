@@ -1,0 +1,693 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -intstyle ise -v 3 -s 3
+-n 3 -fastpaths -xml Top.twx Top.ncd -o Top.twr Top.pcf -ucf ImpConst.ucf
+
+Design file:              Top.ncd
+Physical constraint file: Top.pcf
+Device,package,speed:     xc6slx9,tqg144,C,-3 (PRODUCTION 1.23 2013-10-13)
+Report level:             verbose report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+================================================================================
+Timing constraint: TS_i_CLK = PERIOD TIMEGRP "i_CLK" 50 MHz HIGH 50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 0 paths analyzed, 0 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 component switching limit errors)
+ Minimum period is   5.000ns.
+--------------------------------------------------------------------------------
+
+Component Switching Limit Checks: TS_i_CLK = PERIOD TIMEGRP "i_CLK" 50 MHz HIGH 50%;
+--------------------------------------------------------------------------------
+Slack: 15.000ns (period - (min low pulse limit / (low pulse / period)))
+  Period: 20.000ns
+  Low pulse: 10.000ns
+  Low pulse limit: 2.500ns (Tdcmpw_CLKIN_50_100)
+  Physical resource: clock_gen/pll_base_inst/PLL_ADV/CLKIN1
+  Logical resource: clock_gen/pll_base_inst/PLL_ADV/CLKIN1
+  Location pin: PLL_ADV_X0Y1.CLKIN2
+  Clock network: clock_gen/pll_base_inst/PLL_ADV_ML_NEW_DIVCLK
+--------------------------------------------------------------------------------
+Slack: 15.000ns (period - (min high pulse limit / (high pulse / period)))
+  Period: 20.000ns
+  High pulse: 10.000ns
+  High pulse limit: 2.500ns (Tdcmpw_CLKIN_50_100)
+  Physical resource: clock_gen/pll_base_inst/PLL_ADV/CLKIN1
+  Logical resource: clock_gen/pll_base_inst/PLL_ADV/CLKIN1
+  Location pin: PLL_ADV_X0Y1.CLKIN2
+  Clock network: clock_gen/pll_base_inst/PLL_ADV_ML_NEW_DIVCLK
+--------------------------------------------------------------------------------
+Slack: 18.148ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.852ns (539.957MHz) (Tpllper_CLKIN(Finmax))
+  Physical resource: clock_gen/pll_base_inst/PLL_ADV/CLKIN1
+  Logical resource: clock_gen/pll_base_inst/PLL_ADV/CLKIN1
+  Location pin: PLL_ADV_X0Y1.CLKIN2
+  Clock network: clock_gen/pll_base_inst/PLL_ADV_ML_NEW_DIVCLK
+--------------------------------------------------------------------------------
+
+================================================================================
+Timing constraint: TS_clock_gen_clkout0 = PERIOD TIMEGRP "clock_gen_clkout0" 
+TS_i_CLK * 0.1 HIGH         50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 8834 paths analyzed, 212 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
+ Minimum period is   5.710ns.
+--------------------------------------------------------------------------------
+
+Paths for end point dipReader/tmp_in_13 (SLICE_X9Y46.C1), 434 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     194.290ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               dipReader/cnt_31_1 (FF)
+  Destination:          dipReader/tmp_in_13 (FF)
+  Requirement:          200.000ns
+  Data Path Delay:      5.425ns (Levels of Logic = 7)
+  Clock Path Skew:      -0.081ns (0.546 - 0.627)
+  Source Clock:         o_PSCLK_OBUF falling at 100.000ns
+  Destination Clock:    o_PSCLK_OBUF falling at 300.000ns
+  Clock Uncertainty:    0.204ns
+
+  Clock Uncertainty:          0.204ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.401ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: dipReader/cnt_31_1 to dipReader/tmp_in_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X7Y53.AQ       Tcko                  0.391   dipReader/cnt_31_2
+                                                       dipReader/cnt_31_1
+    SLICE_X10Y50.B1      net (fanout=17)       1.472   dipReader/cnt_31_1
+    SLICE_X10Y50.COUT    Topcyb                0.375   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_lut<13>_INV_0
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X10Y53.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X10Y53.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+    SLICE_X10Y54.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+    SLICE_X10Y54.AMUX    Tcina                 0.177   dipReader/GND_52_o_cnt[31]_sub_6_OUT<31>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_xor<31>
+    SLICE_X8Y52.A1       net (fanout=1)        0.872   dipReader/GND_52_o_cnt[31]_sub_6_OUT<28>
+    SLICE_X8Y52.BMUX     Topab                 0.497   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_lut<4>
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<5>
+    SLICE_X9Y46.C1       net (fanout=16)       1.079   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+    SLICE_X9Y46.CLK      Tas                   0.322   dipReader/tmp_in<13>
+                                                       dipReader/Mmux_tmp_in[13]_DIP_in_MUX_35_o11
+                                                       dipReader/tmp_in_13
+    -------------------------------------------------  ---------------------------
+    Total                                      5.425ns (1.990ns logic, 3.435ns route)
+                                                       (36.7% logic, 63.3% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     194.363ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               dipReader/cnt_31_1 (FF)
+  Destination:          dipReader/tmp_in_13 (FF)
+  Requirement:          200.000ns
+  Data Path Delay:      5.352ns (Levels of Logic = 7)
+  Clock Path Skew:      -0.081ns (0.546 - 0.627)
+  Source Clock:         o_PSCLK_OBUF falling at 100.000ns
+  Destination Clock:    o_PSCLK_OBUF falling at 300.000ns
+  Clock Uncertainty:    0.204ns
+
+  Clock Uncertainty:          0.204ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.401ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: dipReader/cnt_31_1 to dipReader/tmp_in_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X7Y53.AQ       Tcko                  0.391   dipReader/cnt_31_2
+                                                       dipReader/cnt_31_1
+    SLICE_X10Y50.B1      net (fanout=17)       1.472   dipReader/cnt_31_1
+    SLICE_X10Y50.COUT    Topcyb                0.375   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_lut<13>_INV_0
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X10Y53.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X10Y53.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+    SLICE_X10Y54.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+    SLICE_X10Y54.BMUX    Tcinb                 0.260   dipReader/GND_52_o_cnt[31]_sub_6_OUT<31>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_xor<31>
+    SLICE_X8Y52.B3       net (fanout=1)        0.764   dipReader/GND_52_o_cnt[31]_sub_6_OUT<29>
+    SLICE_X8Y52.BMUX     Topbb                 0.449   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_lut<5>
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<5>
+    SLICE_X9Y46.C1       net (fanout=16)       1.079   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+    SLICE_X9Y46.CLK      Tas                   0.322   dipReader/tmp_in<13>
+                                                       dipReader/Mmux_tmp_in[13]_DIP_in_MUX_35_o11
+                                                       dipReader/tmp_in_13
+    -------------------------------------------------  ---------------------------
+    Total                                      5.352ns (2.025ns logic, 3.327ns route)
+                                                       (37.8% logic, 62.2% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     194.366ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               dipReader/cnt_31_1 (FF)
+  Destination:          dipReader/tmp_in_13 (FF)
+  Requirement:          200.000ns
+  Data Path Delay:      5.349ns (Levels of Logic = 6)
+  Clock Path Skew:      -0.081ns (0.546 - 0.627)
+  Source Clock:         o_PSCLK_OBUF falling at 100.000ns
+  Destination Clock:    o_PSCLK_OBUF falling at 300.000ns
+  Clock Uncertainty:    0.204ns
+
+  Clock Uncertainty:          0.204ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.401ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: dipReader/cnt_31_1 to dipReader/tmp_in_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X7Y53.AQ       Tcko                  0.391   dipReader/cnt_31_2
+                                                       dipReader/cnt_31_1
+    SLICE_X10Y50.B1      net (fanout=17)       1.472   dipReader/cnt_31_1
+    SLICE_X10Y50.COUT    Topcyb                0.375   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_lut<13>_INV_0
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.BMUX    Tcinb                 0.260   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X8Y51.D2       net (fanout=1)        0.836   dipReader/GND_52_o_cnt[31]_sub_6_OUT<21>
+    SLICE_X8Y51.COUT     Topcyd                0.261   dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<3>
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_lut<3>
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<3>
+    SLICE_X8Y52.CIN      net (fanout=1)        0.003   dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<3>
+    SLICE_X8Y52.BMUX     Tcinb                 0.268   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<5>
+    SLICE_X9Y46.C1       net (fanout=16)       1.079   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+    SLICE_X9Y46.CLK      Tas                   0.322   dipReader/tmp_in<13>
+                                                       dipReader/Mmux_tmp_in[13]_DIP_in_MUX_35_o11
+                                                       dipReader/tmp_in_13
+    -------------------------------------------------  ---------------------------
+    Total                                      5.349ns (1.953ns logic, 3.396ns route)
+                                                       (36.5% logic, 63.5% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point dipReader/tmp_in_6 (SLICE_X10Y47.A3), 434 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     194.370ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               dipReader/cnt_31_1 (FF)
+  Destination:          dipReader/tmp_in_6 (FF)
+  Requirement:          200.000ns
+  Data Path Delay:      5.344ns (Levels of Logic = 7)
+  Clock Path Skew:      -0.082ns (0.545 - 0.627)
+  Source Clock:         o_PSCLK_OBUF falling at 100.000ns
+  Destination Clock:    o_PSCLK_OBUF falling at 300.000ns
+  Clock Uncertainty:    0.204ns
+
+  Clock Uncertainty:          0.204ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.401ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: dipReader/cnt_31_1 to dipReader/tmp_in_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X7Y53.AQ       Tcko                  0.391   dipReader/cnt_31_2
+                                                       dipReader/cnt_31_1
+    SLICE_X10Y50.B1      net (fanout=17)       1.472   dipReader/cnt_31_1
+    SLICE_X10Y50.COUT    Topcyb                0.375   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_lut<13>_INV_0
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X10Y53.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X10Y53.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+    SLICE_X10Y54.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+    SLICE_X10Y54.AMUX    Tcina                 0.177   dipReader/GND_52_o_cnt[31]_sub_6_OUT<31>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_xor<31>
+    SLICE_X8Y52.A1       net (fanout=1)        0.872   dipReader/GND_52_o_cnt[31]_sub_6_OUT<28>
+    SLICE_X8Y52.BMUX     Topab                 0.497   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_lut<4>
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<5>
+    SLICE_X10Y47.A3      net (fanout=16)       0.979   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+    SLICE_X10Y47.CLK     Tas                   0.341   dipReader/tmp_in<7>
+                                                       dipReader/Mmux_tmp_in[6]_DIP_in_MUX_42_o11
+                                                       dipReader/tmp_in_6
+    -------------------------------------------------  ---------------------------
+    Total                                      5.344ns (2.009ns logic, 3.335ns route)
+                                                       (37.6% logic, 62.4% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     194.443ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               dipReader/cnt_31_1 (FF)
+  Destination:          dipReader/tmp_in_6 (FF)
+  Requirement:          200.000ns
+  Data Path Delay:      5.271ns (Levels of Logic = 7)
+  Clock Path Skew:      -0.082ns (0.545 - 0.627)
+  Source Clock:         o_PSCLK_OBUF falling at 100.000ns
+  Destination Clock:    o_PSCLK_OBUF falling at 300.000ns
+  Clock Uncertainty:    0.204ns
+
+  Clock Uncertainty:          0.204ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.401ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: dipReader/cnt_31_1 to dipReader/tmp_in_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X7Y53.AQ       Tcko                  0.391   dipReader/cnt_31_2
+                                                       dipReader/cnt_31_1
+    SLICE_X10Y50.B1      net (fanout=17)       1.472   dipReader/cnt_31_1
+    SLICE_X10Y50.COUT    Topcyb                0.375   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_lut<13>_INV_0
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X10Y53.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X10Y53.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+    SLICE_X10Y54.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+    SLICE_X10Y54.BMUX    Tcinb                 0.260   dipReader/GND_52_o_cnt[31]_sub_6_OUT<31>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_xor<31>
+    SLICE_X8Y52.B3       net (fanout=1)        0.764   dipReader/GND_52_o_cnt[31]_sub_6_OUT<29>
+    SLICE_X8Y52.BMUX     Topbb                 0.449   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_lut<5>
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<5>
+    SLICE_X10Y47.A3      net (fanout=16)       0.979   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+    SLICE_X10Y47.CLK     Tas                   0.341   dipReader/tmp_in<7>
+                                                       dipReader/Mmux_tmp_in[6]_DIP_in_MUX_42_o11
+                                                       dipReader/tmp_in_6
+    -------------------------------------------------  ---------------------------
+    Total                                      5.271ns (2.044ns logic, 3.227ns route)
+                                                       (38.8% logic, 61.2% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     194.446ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               dipReader/cnt_31_1 (FF)
+  Destination:          dipReader/tmp_in_6 (FF)
+  Requirement:          200.000ns
+  Data Path Delay:      5.268ns (Levels of Logic = 6)
+  Clock Path Skew:      -0.082ns (0.545 - 0.627)
+  Source Clock:         o_PSCLK_OBUF falling at 100.000ns
+  Destination Clock:    o_PSCLK_OBUF falling at 300.000ns
+  Clock Uncertainty:    0.204ns
+
+  Clock Uncertainty:          0.204ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.401ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: dipReader/cnt_31_1 to dipReader/tmp_in_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X7Y53.AQ       Tcko                  0.391   dipReader/cnt_31_2
+                                                       dipReader/cnt_31_1
+    SLICE_X10Y50.B1      net (fanout=17)       1.472   dipReader/cnt_31_1
+    SLICE_X10Y50.COUT    Topcyb                0.375   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_lut<13>_INV_0
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.BMUX    Tcinb                 0.260   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X8Y51.D2       net (fanout=1)        0.836   dipReader/GND_52_o_cnt[31]_sub_6_OUT<21>
+    SLICE_X8Y51.COUT     Topcyd                0.261   dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<3>
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_lut<3>
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<3>
+    SLICE_X8Y52.CIN      net (fanout=1)        0.003   dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<3>
+    SLICE_X8Y52.BMUX     Tcinb                 0.268   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<5>
+    SLICE_X10Y47.A3      net (fanout=16)       0.979   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+    SLICE_X10Y47.CLK     Tas                   0.341   dipReader/tmp_in<7>
+                                                       dipReader/Mmux_tmp_in[6]_DIP_in_MUX_42_o11
+                                                       dipReader/tmp_in_6
+    -------------------------------------------------  ---------------------------
+    Total                                      5.268ns (1.972ns logic, 3.296ns route)
+                                                       (37.4% logic, 62.6% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point dipReader/tmp_in_11 (SLICE_X6Y47.C3), 434 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     194.372ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               dipReader/cnt_31_1 (FF)
+  Destination:          dipReader/tmp_in_11 (FF)
+  Requirement:          200.000ns
+  Data Path Delay:      5.350ns (Levels of Logic = 7)
+  Clock Path Skew:      -0.074ns (0.553 - 0.627)
+  Source Clock:         o_PSCLK_OBUF falling at 100.000ns
+  Destination Clock:    o_PSCLK_OBUF falling at 300.000ns
+  Clock Uncertainty:    0.204ns
+
+  Clock Uncertainty:          0.204ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.401ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: dipReader/cnt_31_1 to dipReader/tmp_in_11
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X7Y53.AQ       Tcko                  0.391   dipReader/cnt_31_2
+                                                       dipReader/cnt_31_1
+    SLICE_X10Y50.B1      net (fanout=17)       1.472   dipReader/cnt_31_1
+    SLICE_X10Y50.COUT    Topcyb                0.375   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_lut<13>_INV_0
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X10Y53.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X10Y53.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+    SLICE_X10Y54.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+    SLICE_X10Y54.AMUX    Tcina                 0.177   dipReader/GND_52_o_cnt[31]_sub_6_OUT<31>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_xor<31>
+    SLICE_X8Y52.A1       net (fanout=1)        0.872   dipReader/GND_52_o_cnt[31]_sub_6_OUT<28>
+    SLICE_X8Y52.BMUX     Topab                 0.497   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_lut<4>
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<5>
+    SLICE_X6Y47.C3       net (fanout=16)       0.985   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+    SLICE_X6Y47.CLK      Tas                   0.341   dipReader/tmp_in<11>
+                                                       dipReader/Mmux_tmp_in[11]_DIP_in_MUX_37_o11
+                                                       dipReader/tmp_in_11
+    -------------------------------------------------  ---------------------------
+    Total                                      5.350ns (2.009ns logic, 3.341ns route)
+                                                       (37.6% logic, 62.4% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     194.445ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               dipReader/cnt_31_1 (FF)
+  Destination:          dipReader/tmp_in_11 (FF)
+  Requirement:          200.000ns
+  Data Path Delay:      5.277ns (Levels of Logic = 7)
+  Clock Path Skew:      -0.074ns (0.553 - 0.627)
+  Source Clock:         o_PSCLK_OBUF falling at 100.000ns
+  Destination Clock:    o_PSCLK_OBUF falling at 300.000ns
+  Clock Uncertainty:    0.204ns
+
+  Clock Uncertainty:          0.204ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.401ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: dipReader/cnt_31_1 to dipReader/tmp_in_11
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X7Y53.AQ       Tcko                  0.391   dipReader/cnt_31_2
+                                                       dipReader/cnt_31_1
+    SLICE_X10Y50.B1      net (fanout=17)       1.472   dipReader/cnt_31_1
+    SLICE_X10Y50.COUT    Topcyb                0.375   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_lut<13>_INV_0
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X10Y53.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X10Y53.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+    SLICE_X10Y54.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<27>
+    SLICE_X10Y54.BMUX    Tcinb                 0.260   dipReader/GND_52_o_cnt[31]_sub_6_OUT<31>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_xor<31>
+    SLICE_X8Y52.B3       net (fanout=1)        0.764   dipReader/GND_52_o_cnt[31]_sub_6_OUT<29>
+    SLICE_X8Y52.BMUX     Topbb                 0.449   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_lut<5>
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<5>
+    SLICE_X6Y47.C3       net (fanout=16)       0.985   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+    SLICE_X6Y47.CLK      Tas                   0.341   dipReader/tmp_in<11>
+                                                       dipReader/Mmux_tmp_in[11]_DIP_in_MUX_37_o11
+                                                       dipReader/tmp_in_11
+    -------------------------------------------------  ---------------------------
+    Total                                      5.277ns (2.044ns logic, 3.233ns route)
+                                                       (38.7% logic, 61.3% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     194.448ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               dipReader/cnt_31_1 (FF)
+  Destination:          dipReader/tmp_in_11 (FF)
+  Requirement:          200.000ns
+  Data Path Delay:      5.274ns (Levels of Logic = 6)
+  Clock Path Skew:      -0.074ns (0.553 - 0.627)
+  Source Clock:         o_PSCLK_OBUF falling at 100.000ns
+  Destination Clock:    o_PSCLK_OBUF falling at 300.000ns
+  Clock Uncertainty:    0.204ns
+
+  Clock Uncertainty:          0.204ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Discrete Jitter (DJ):       0.401ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: dipReader/cnt_31_1 to dipReader/tmp_in_11
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X7Y53.AQ       Tcko                  0.391   dipReader/cnt_31_2
+                                                       dipReader/cnt_31_1
+    SLICE_X10Y50.B1      net (fanout=17)       1.472   dipReader/cnt_31_1
+    SLICE_X10Y50.COUT    Topcyb                0.375   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_lut<13>_INV_0
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<15>
+    SLICE_X10Y51.COUT    Tbyp                  0.076   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.CIN     net (fanout=1)        0.003   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<19>
+    SLICE_X10Y52.BMUX    Tcinb                 0.260   dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+                                                       dipReader/Msub_GND_52_o_cnt[31]_sub_6_OUT_cy<23>
+    SLICE_X8Y51.D2       net (fanout=1)        0.836   dipReader/GND_52_o_cnt[31]_sub_6_OUT<21>
+    SLICE_X8Y51.COUT     Topcyd                0.261   dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<3>
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_lut<3>
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<3>
+    SLICE_X8Y52.CIN      net (fanout=1)        0.003   dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<3>
+    SLICE_X8Y52.BMUX     Tcinb                 0.268   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+                                                       dipReader/Mcompar_GND_52_o_GND_52_o_LessThan_8_o_cy<5>
+    SLICE_X6Y47.C3       net (fanout=16)       0.985   dipReader/GND_52_o_GND_52_o_LessThan_8_o
+    SLICE_X6Y47.CLK      Tas                   0.341   dipReader/tmp_in<11>
+                                                       dipReader/Mmux_tmp_in[11]_DIP_in_MUX_37_o11
+                                                       dipReader/tmp_in_11
+    -------------------------------------------------  ---------------------------
+    Total                                      5.274ns (1.972ns logic, 3.302ns route)
+                                                       (37.4% logic, 62.6% route)
+
+--------------------------------------------------------------------------------
+
+Hold Paths: TS_clock_gen_clkout0 = PERIOD TIMEGRP "clock_gen_clkout0" TS_i_CLK * 0.1 HIGH
+        50%;
+--------------------------------------------------------------------------------
+
+Paths for end point dipReader/tmp_in_6 (SLICE_X10Y47.A6), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.419ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               dipReader/tmp_in_6 (FF)
+  Destination:          dipReader/tmp_in_6 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.419ns (Levels of Logic = 1)
+  Clock Path Skew:      0.000ns
+  Source Clock:         o_PSCLK_OBUF falling at 300.000ns
+  Destination Clock:    o_PSCLK_OBUF falling at 300.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: dipReader/tmp_in_6 to dipReader/tmp_in_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y47.AQ      Tcko                  0.200   dipReader/tmp_in<7>
+                                                       dipReader/tmp_in_6
+    SLICE_X10Y47.A6      net (fanout=3)        0.029   dipReader/tmp_in<6>
+    SLICE_X10Y47.CLK     Tah         (-Th)    -0.190   dipReader/tmp_in<7>
+                                                       dipReader/Mmux_tmp_in[6]_DIP_in_MUX_42_o11
+                                                       dipReader/tmp_in_6
+    -------------------------------------------------  ---------------------------
+    Total                                      0.419ns (0.390ns logic, 0.029ns route)
+                                                       (93.1% logic, 6.9% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point dipReader/tmp_in_8 (SLICE_X9Y48.A6), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.441ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               dipReader/tmp_in_8 (FF)
+  Destination:          dipReader/tmp_in_8 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.441ns (Levels of Logic = 1)
+  Clock Path Skew:      0.000ns
+  Source Clock:         o_PSCLK_OBUF falling at 300.000ns
+  Destination Clock:    o_PSCLK_OBUF falling at 300.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: dipReader/tmp_in_8 to dipReader/tmp_in_8
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X9Y48.AQ       Tcko                  0.198   dipReader/tmp_in<9>
+                                                       dipReader/tmp_in_8
+    SLICE_X9Y48.A6       net (fanout=3)        0.028   dipReader/tmp_in<8>
+    SLICE_X9Y48.CLK      Tah         (-Th)    -0.215   dipReader/tmp_in<9>
+                                                       dipReader/Mmux_tmp_in[8]_DIP_in_MUX_40_o11
+                                                       dipReader/tmp_in_8
+    -------------------------------------------------  ---------------------------
+    Total                                      0.441ns (0.413ns logic, 0.028ns route)
+                                                       (93.7% logic, 6.3% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point dipReader/tmp_in_14 (SLICE_X9Y47.A6), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.442ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               dipReader/tmp_in_14 (FF)
+  Destination:          dipReader/tmp_in_14 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.442ns (Levels of Logic = 1)
+  Clock Path Skew:      0.000ns
+  Source Clock:         o_PSCLK_OBUF falling at 300.000ns
+  Destination Clock:    o_PSCLK_OBUF falling at 300.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: dipReader/tmp_in_14 to dipReader/tmp_in_14
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X9Y47.AQ       Tcko                  0.198   dipReader/tmp_in<15>
+                                                       dipReader/tmp_in_14
+    SLICE_X9Y47.A6       net (fanout=3)        0.029   dipReader/tmp_in<14>
+    SLICE_X9Y47.CLK      Tah         (-Th)    -0.215   dipReader/tmp_in<15>
+                                                       dipReader/Mmux_tmp_in[14]_DIP_in_MUX_34_o11
+                                                       dipReader/tmp_in_14
+    -------------------------------------------------  ---------------------------
+    Total                                      0.442ns (0.413ns logic, 0.029ns route)
+                                                       (93.4% logic, 6.6% route)
+
+--------------------------------------------------------------------------------
+
+Component Switching Limit Checks: TS_clock_gen_clkout0 = PERIOD TIMEGRP "clock_gen_clkout0" TS_i_CLK * 0.1 HIGH
+        50%;
+--------------------------------------------------------------------------------
+Slack: 198.270ns (period - min period limit)
+  Period: 200.000ns
+  Min period limit: 1.730ns (578.035MHz) (Tbcper_I)
+  Physical resource: clock_gen/clkout1_buf/I0
+  Logical resource: clock_gen/clkout1_buf/I0
+  Location pin: BUFGMUX_X2Y2.I0
+  Clock network: clock_gen/clkout0
+--------------------------------------------------------------------------------
+Slack: 199.570ns (period - min period limit)
+  Period: 200.000ns
+  Min period limit: 0.430ns (2325.581MHz) (Tcp)
+  Physical resource: dipReader/cnt<3>/CLK
+  Logical resource: dipReader/cnt_0/CK
+  Location pin: SLICE_X6Y49.CLK
+  Clock network: o_PSCLK_OBUF
+--------------------------------------------------------------------------------
+Slack: 199.570ns (period - min period limit)
+  Period: 200.000ns
+  Min period limit: 0.430ns (2325.581MHz) (Tcp)
+  Physical resource: dipReader/cnt<3>/CLK
+  Logical resource: dipReader/cnt_1/CK
+  Location pin: SLICE_X6Y49.CLK
+  Clock network: o_PSCLK_OBUF
+--------------------------------------------------------------------------------
+
+
+Derived Constraint Report
+Derived Constraints for TS_i_CLK
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|                               |   Period    |       Actual Period       |      Timing Errors        |      Paths Analyzed       |
+|           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
+|                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|TS_i_CLK                       |     20.000ns|      5.000ns|      0.571ns|            0|            0|            0|         8834|
+| TS_clock_gen_clkout0          |    200.000ns|      5.710ns|          N/A|            0|            0|         8834|            0|
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+All constraints were met.
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Clock to Setup on destination clock i_CLK
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+i_CLK          |         |         |         |    5.710|
+---------------+---------+---------+---------+---------+
+
+
+Timing summary:
+---------------
+
+Timing errors: 0  Score: 0  (Setup/Max: 0, Hold: 0)
+
+Constraints cover 8834 paths, 0 nets, and 496 connections
+
+Design statistics:
+   Minimum period:   5.710ns{1}   (Maximum frequency: 175.131MHz)
+
+
+------------------------------------Footnotes-----------------------------------
+1)  The minimum period statistic assumes all single cycle delays.
+
+Analysis completed Wed Oct 18 15:38:59 2017 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 243 MB
+
+
+

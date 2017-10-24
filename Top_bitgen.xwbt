@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=D:\XilinxProjects\ArchLab\Top.ncd
+OUTFILE=D:\XilinxProjects\ArchLab\Top.bit
+FAMILY=Spartan6
+PART=xc6slx9-3tqg144
+WORKINGDIR=D:\XilinxProjects\ArchLab
+LICENSE=WebPack
+USER_INFO=__0_0_0

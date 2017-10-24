@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    21:00:59 10/10/2017 
+// Create Date:    08:25:37 10/18/2017 
 // Design Name: 
-// Module Name:    LED_driver 
+// Module Name:    dipReader 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,32 +18,37 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module LED_driver(
-    input [0:15] LED_in,
-    input clk,
-    output reg LED_data,
-    output reg LED_latch
-    );
+module dipReader(
 
-	wire [0:15] cross;	
-	assign cross[0:7] = LED_in[8:15];
-	assign cross[8:15] = LED_in[0:7];
+    input DIP_in,
+    input clk,
+    output [0:15] DIP_data,
+    output reg DIP_latch
+    );
+	 
+	reg [0:15] tmp_in;
+	wire [0:15] cross;
+
 	integer cnt = 0;
-	initial 
-		LED_latch = 1'b1;
-		
+	
+	assign cross[0:7] = tmp_in[8:15];
+	assign cross[8:15] = tmp_in[0:7];
+	assign DIP_data = cross;
+	initial begin
+		DIP_latch = 1'b1;
+		tmp_in = 16'b0000_0000_0000_0000;
+	end
 	always @(negedge clk) begin
 		if(cnt < 16) begin
-			LED_data = cross[cnt];
+			DIP_latch = 1'b1;
+			tmp_in[15-cnt] = DIP_in;
 			cnt = cnt + 1;
-			if( cnt == 16) begin
-				LED_latch = 1'b0;
-			end
 		end
-		else begin
-				LED_latch = 1'b1;
-				cnt = 0;
+		else if(cnt == 16 ) begin
+			DIP_latch = 1'b0;
+			cnt = 0;
 		end
+
 	end
-	
+
 endmodule

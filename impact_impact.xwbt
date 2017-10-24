@@ -1,0 +1,8 @@
+INTSTYLE=impact
+INFILE=D:\XilinxProjects\ArchLab\impact.xsl
+OUTFILE=D:\XilinxProjects\ArchLab\impact.xsl
+FAMILY=Multiple
+PART=Multiple
+WORKINGDIR=D:\XilinxProjects\ArchLab
+LICENSE=iMPACT
+USER_INFO=iMPACT
