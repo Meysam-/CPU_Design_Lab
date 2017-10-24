@@ -30,6 +30,28 @@ module SevenSegDriver(
 	 wire [3:0] hudreds;
 	 wire [3:0] milions;
 	 
+	 wire [15:0] out1;
+	 wire [15:0] out10;
+	 wire [15:0] out100;
+	 wire [15:0] out1000;
+	 
+	 reg [15:0] out;
+	 
+	 reg [1:0] exp1;
+	 reg [1:0] exp10;
+	 reg [1:0] exp100;
+	 reg [1:0] exp1000;
+	 
+	 integer cnt = 0;
+	 initial begin
+		out = out1;
+		exp1 = 2'b00;
+		exp10 = 2'b01;
+		exp100 = 2'b10;
+		exp1000 = 2'b11;
+	 end
+	 
+	 
 	 bin_to_BCD m1(
 		.bin(bin),
 		.ones(ones),
@@ -37,6 +59,51 @@ module SevenSegDriver(
 		.hundreds(hundreds),
 		.milions(milions)
 	 );
-
+	 
+	 SevenSegDCD dcd1(
+    .in_digit(ones),
+    .exp(exp1),
+    .segments(out1[15:8]),
+    .control(out1[7:0])
+    );
+	 
+	 SevenSegDCD dcd10(
+    .in_digit(tens),
+    .exp(exp10),
+    .segments(out10[15:8]),
+    .control(out10[7:0])
+    );
+	 
+	 SevenSegDCD dcd100(
+    .in_digit(hundreds),
+    .exp(exp100),
+    .segments(out100[15:8]),
+    .control(out100[7:0])
+    );
+	 
+	 SevenSegDCD dcd1000(
+    .in_digit(milions),
+    .exp(exp1000),
+    .segments(out1000[15:8]),
+    .control(out1000[7:0])
+    );
+	 
+	 parallel_to_serial m3(
+    .p_in(out),
+    .clk(clk),
+    .s_out(seg_data),
+    .latch(seg_latch)
+    );
+	 
+	always @(negedge clk) begin
+		if(seg_latch == 1) begin
+			case (cnt)
+				0: out = out10;
+				1: out = out100;
+				2: out = out1000;
+			endcase
+			cnt = cnt + 1;
+		end
+	end
 
 endmodule
