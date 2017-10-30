@@ -19,7 +19,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module parallel_to_serial(
-    input [16:0] p_in,
+    input [15:0] p_in,
     input clk,
     output reg s_out,
     output reg latch

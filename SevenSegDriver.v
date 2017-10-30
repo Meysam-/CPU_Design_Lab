@@ -19,15 +19,16 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module SevenSegDriver(
-    input [16:0] bin,
+    input [15:0] bin,
     input clk,
     output seg_data,
-    output seg_latch
+    output seg_latch,
+	 output [15:0] temp
     );
 	 
 	 wire [3:0] ones;
 	 wire [3:0] tens;
-	 wire [3:0] hudreds;
+	 wire [3:0] hundreds;
 	 wire [3:0] milions;
 	 
 	 wire [15:0] out1;
@@ -44,7 +45,7 @@ module SevenSegDriver(
 	 
 	 integer cnt = 0;
 	 initial begin
-		out = out1;
+		out = 16'b1111_1110_0100_0000;
 		exp1 = 2'b00;
 		exp10 = 2'b01;
 		exp100 = 2'b10;
@@ -95,14 +96,18 @@ module SevenSegDriver(
     .latch(seg_latch)
     );
 	 
+	assign temp = {milions , hundreds , tens , ones};
+	 
 	always @(negedge clk) begin
-		if(seg_latch == 1) begin
+		if(seg_latch == 0) begin
 			case (cnt)
-				0: out = out10;
-				1: out = out100;
-				2: out = out1000;
+				0: out = out1;
+				1: out = out10;
+				2: out = out100;
+				3: out = out1000;
 			endcase
 			cnt = cnt + 1;
+			if(cnt == 4) cnt = 0;
 		end
 	end
 

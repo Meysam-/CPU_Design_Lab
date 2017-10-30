@@ -109,8 +109,8 @@ assign o_TXD2 = 1'bz;
 
 
 
-assign o_SEGData = 1'bz;
-assign o_SEGLatch = 1'bz;
+//assign o_SEGData = 1'bz;
+//assign o_SEGLatch = 1'bz;
 
 assign o_LCDData = 1'bz;
 assign o_LCDLatch = 1'bz;
@@ -122,6 +122,7 @@ wire clk_5, clk_20, clk_50, clk_100;
 //reg [0:15] led = 16'b0010_1011_1101_0111;
 //reg [0:15] led = 16'b0100_0000_0000_0000;
 wire [0:15] led ;
+wire [15:0] led2 ;
 
 
 
@@ -139,7 +140,8 @@ SevenSegDriver seven_seg(
 	.bin(led),
    .clk(clk_5),
    .seg_data(o_SEGData),
-   .seg_latch(o_SEGLatch)
+   .seg_latch(o_SEGLatch),
+	.temp(led2)
 	);
 
 dipReader dipReader(
@@ -152,7 +154,7 @@ dipReader dipReader(
 
 LED_driver ledDriver(
 	.clk(clk_5),
-	.LED_in(led),
+	.LED_in(led2),
 	.LED_data(o_LEDData),
 	.LED_latch(o_LEDLatch)
 	);
