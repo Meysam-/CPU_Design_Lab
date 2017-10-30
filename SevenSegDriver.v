@@ -22,8 +22,8 @@ module SevenSegDriver(
     input [15:0] bin,
     input clk,
     output seg_data,
-    output seg_latch,
-	 output [15:0] temp
+    output seg_latch
+	 //output [15:0] temp
     );
 	 
 	 wire [3:0] ones;
@@ -96,7 +96,7 @@ module SevenSegDriver(
     .latch(seg_latch)
     );
 	 
-	assign temp = {milions , hundreds , tens , ones};
+	//assign temp = {milions , hundreds , tens , ones};
 	 
 	always @(negedge clk) begin
 		if(seg_latch == 0) begin

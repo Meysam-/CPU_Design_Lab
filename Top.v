@@ -121,8 +121,9 @@ assign o_LCDLatch = 1'bz;
 wire clk_5, clk_20, clk_50, clk_100;
 //reg [0:15] led = 16'b0010_1011_1101_0111;
 //reg [0:15] led = 16'b0100_0000_0000_0000;
-wire [0:15] led ;
-wire [15:0] led2 ;
+wire [15:0] led ;
+wire [15:0] cnt ;
+wire s3,s4,s5,s6,s7;
 
 
 
@@ -137,24 +138,42 @@ ClockGen clock_gen(
 assign o_PSCLK = clk_5;
 
 SevenSegDriver seven_seg(
-	.bin(led),
+	.bin(cnt),
    .clk(clk_5),
    .seg_data(o_SEGData),
-   .seg_latch(o_SEGLatch),
-	.temp(led2)
+   .seg_latch(o_SEGLatch)
+	//.temp(led2)
 	);
 
 dipReader dipReader(
 	.clk(clk_5),
 	.DIP_in(i_DIPData),
-	.DIP_data(led),
-	.DIP_latch(o_DIPLatch)
+	.DIP_data(),
+	.DIP_latch(o_DIPLatch),
+	.s3(s3),
+	.s4(s4),
+	.s5(s5),
+	.s6(s6),
+	.s7(s7)
 	);
 
+counter c(
+    .signal(s3),
+	 .reset(s7), //active_low
+    .count(cnt)
+    );
+	 
+assign led[3] = s3;
+assign led[4] = s4;
+assign led[5] = s5;
+assign led[6] = s6;
+assign led[7] = s7;
+assign led[2:0] = 3'b000;
+assign led[15:8] = 8'b0000_0000;
 
 LED_driver ledDriver(
 	.clk(clk_5),
-	.LED_in(led2),
+	.LED_in(led),
 	.LED_data(o_LEDData),
 	.LED_latch(o_LEDLatch)
 	);
