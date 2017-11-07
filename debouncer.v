@@ -23,6 +23,29 @@ module debouncer(
     input clk,
     output out
     );
+	 
+	 wire lastSignal;
+	 
+	 initial
+		lastSignal = 0;
+	 
+	 integer cnt = 0;
+	 
+	 always @(negedge clk) begin
+		if(in == lastSignal) begin
+			cnt = cnt + 1;
+		end
+		else
+		begin
+			cnt = 0;
+			lastSignal = in;
+		end
+		
+		if(cnt > 3) begin
+			out = lastSignal;
+		end
+		
+	 end
 
 
 endmodule
