@@ -119,12 +119,23 @@ assign o_LCDLatch = 1'bz;
 /////////////////////////////////////
 
 wire clk_5, clk_20, clk_50, clk_100;
+wire clock,reset;
 //reg [0:15] led = 16'b0010_1011_1101_0111;
 //reg [0:15] led = 16'b0100_0000_0000_0000;
 wire [15:0] led ;
-wire [15:0] cnt ;
 wire s3,s4,s5,s6,s7;
+reg [15:0] PC;
 
+initial begin
+	PC = 16'b0000_0000_0000_0000;
+end
+
+always @(negedge clock or negedge reset) begin
+	if(!reset)
+		PC = 16'b0000_0000_0000_0000;
+	else
+		PC = PC + 1;
+end
 
 
 ClockGen clock_gen(
@@ -138,7 +149,7 @@ ClockGen clock_gen(
 assign o_PSCLK = clk_5;
 
 SevenSegDriver seven_seg(
-	.bin(cnt),
+	.bin(PC),
    .clk(clk_5),
    .seg_data(o_SEGData),
    .seg_latch(o_SEGLatch)
@@ -157,11 +168,6 @@ dipReader dipReader(
 	.s7(s7)
 	);
 
-counter c(
-    .signal(s3),
-	 .reset(s7), //active_low
-    .count(cnt)
-    );
 	 
 assign led[3] = s3;
 assign led[4] = s4;
@@ -177,6 +183,20 @@ LED_driver ledDriver(
 	.LED_data(o_LEDData),
 	.LED_latch(o_LEDLatch)
 	);
+	
+debouncer db1(
+	.clk(clk_5),
+	.in(s5),
+	.out(clock)
+);
+
+debouncer db2(
+	.clk(clk_5),
+	.in(s7),
+	.out(reset)
+);
+
+
 
 endmodule
 

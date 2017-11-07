@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    17:39:50 10/30/2017 
+// Create Date:    21:41:28 11/07/2017 
 // Design Name: 
-// Module Name:    counter 
+// Module Name:    debouncer 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,20 +18,11 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module counter(
-    input signal,
-	 input reset, //active_low
-    output reg [15:0] count
+module debouncer(
+    input in,
+    input clk,
+    output out
     );
-	
-	initial count = 16'b0000_0000_0000_0000;
-	
-	
-	always @(negedge signal or negedge reset) begin
-		if(!reset)
-			count = 16'b0000_0000_0000_0000;
-		else
-			count = count + 1;
-	end
+
 
 endmodule
