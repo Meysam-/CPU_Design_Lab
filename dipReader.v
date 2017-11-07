@@ -39,11 +39,11 @@ module dipReader(
 	assign cross[0:7] = tmp_in[16:23];
 	assign cross[8:15] = tmp_in[8:15];
 	assign DIP_data = cross;
-	assign s3 = tmp_in[4];
-	assign s4 = tmp_in[3];
-	assign s5 = tmp_in[2];
-	assign s6 = tmp_in[1];
-	assign s7 = tmp_in[0];
+	assign s3 = tmp_in[3];
+	assign s4 = tmp_in[4];
+	assign s5 = tmp_in[5];
+	assign s6 = tmp_in[6];
+	assign s7 = tmp_in[7];
 
 	initial begin
 		DIP_latch = 1'b1;
