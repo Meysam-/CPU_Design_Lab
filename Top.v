@@ -146,13 +146,13 @@ ClockGen clock_gen(
     .CLK_OUT_50(clk_50),     // OUT
     .CLK_OUT_100(clk_100)	// OUT
 	 );
-	 
-imem i_mem (
+
+imem2 i_mem (
   .clka(clk_5), // input clka
   .addra(PC), // input [7 : 0] addra
   .douta(IR) // output [15 : 0] douta
 );
-	 
+
 assign o_PSCLK = clk_5;
 
 SevenSegDriver seven_seg(
