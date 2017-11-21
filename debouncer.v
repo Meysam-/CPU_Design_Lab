@@ -21,10 +21,10 @@
 module debouncer(
     input in,
     input clk,
-    output out
+    output reg out
     );
 	 
-	 wire lastSignal;
+	 reg lastSignal;
 	 
 	 initial
 		lastSignal = 0;
@@ -41,7 +41,7 @@ module debouncer(
 			lastSignal = in;
 		end
 		
-		if(cnt > 3) begin
+		if(cnt > 100000) begin
 			out = lastSignal;
 		end
 		

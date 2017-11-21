@@ -125,6 +125,7 @@ wire clock,reset;
 wire [15:0] led ;
 wire s3,s4,s5,s6,s7;
 reg [15:0] PC;
+wire [15:0] IR;
 
 initial begin
 	PC = 16'b0000_0000_0000_0000;
@@ -145,6 +146,12 @@ ClockGen clock_gen(
     .CLK_OUT_50(clk_50),     // OUT
     .CLK_OUT_100(clk_100)	// OUT
 	 );
+	 
+imem i_mem (
+  .clka(clk_5), // input clka
+  .addra(PC), // input [7 : 0] addra
+  .douta(IR) // output [15 : 0] douta
+);
 	 
 assign o_PSCLK = clk_5;
 
@@ -179,20 +186,20 @@ assign led[15:8] = 8'b0000_0000;
 
 LED_driver ledDriver(
 	.clk(clk_5),
-	.LED_in(led),
+	.LED_in(IR),
 	.LED_data(o_LEDData),
 	.LED_latch(o_LEDLatch)
 	);
 	
 debouncer db1(
 	.clk(clk_5),
-	.in(s5),
+	.in(s3),
 	.out(clock)
 );
 
 debouncer db2(
 	.clk(clk_5),
-	.in(s7),
+	.in(s4),
 	.out(reset)
 );
 
