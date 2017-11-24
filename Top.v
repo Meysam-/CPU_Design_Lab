@@ -121,11 +121,23 @@ assign o_LCDLatch = 1'bz;
 wire clk_5, clk_20, clk_50, clk_100;
 wire clock,reset;
 //reg [0:15] led = 16'b0010_1011_1101_0111;
-//reg [0:15] led = 16'b0100_0000_0000_0000;
-wire [15:0] led ;
+reg [15:0] led = 16'b0000_0000_0000_0000;
+//wire [15:0] led ;
 wire s3,s4,s5,s6,s7;
 reg [15:0] PC;
 wire [15:0] IR;
+
+wire [7:0] res;
+wire CF,ZF,SF,OF;
+
+wire [3:0] alu_op;
+wire [2:0] addr1;
+wire [2:0] addr2;
+wire show,write;
+
+wire [7:0] r1;
+wire [7:0] r2;
+
 
 initial begin
 	PC = 16'b0000_0000_0000_0000;
@@ -175,18 +187,17 @@ dipReader dipReader(
 	.s7(s7)
 	);
 
-	 
-assign led[3] = s3;
-assign led[4] = s4;
-assign led[5] = s5;
-assign led[6] = s6;
-assign led[7] = s7;
-assign led[2:0] = 3'b000;
-assign led[15:8] = 8'b0000_0000;
+
+always begin
+	led[15:12] = {CF,ZF,SF,OF};
+	led[11:8] = alu_op;
+	//led[7:0] = ((show)? res : 8'b0000_0000);
+	led[7:0] = r1;
+end
 
 LED_driver ledDriver(
 	.clk(clk_5),
-	.LED_in(IR),
+	.LED_in(led),
 	.LED_data(o_LEDData),
 	.LED_latch(o_LEDLatch)
 	);
@@ -203,7 +214,36 @@ debouncer db2(
 	.out(reset)
 );
 
+Decoder dcd(
+    .instr(IR),
+    .alu_op(alu_op),
+    .addr1(addr1),
+    .addr2(addr2),
+    .show(show),
+    .write(write)
+    );
+	 
+reg_bank rb(
+	 .addr1(addr1),
+    .addr2(addr2),
+    .addrw(addr1),
+    .din(res),
+    .clk(clock),
+    .write(write),
+    .out1(r1),
+    .out2(r2)
+);
 
+Alu alu(
+    .in1(r1),
+    .in2(r2),
+    .op(alu_op),
+    .res(res),
+    .CF(CF),
+    .ZF(ZF),
+    .SF(SF),
+    .OF(OF)
+    );
 
 endmodule
 
