@@ -120,21 +120,23 @@ assign o_LCDLatch = 1'bz;
 
 wire clk_5, clk_20, clk_50, clk_100;
 wire clock,reset;
-//reg [0:15] led = 16'b0010_1011_1101_0111;
 reg [15:0] led = 16'b0000_0000_0000_0000;
-//wire [15:0] led ;
+
 wire s3,s4,s5,s6,s7;
 reg [15:0] PC;
 wire [15:0] IR;
 
+//ALU outputs
 wire [7:0] res;
 wire CF,ZF,SF,OF;
 
+//Decoder outputs and ALU inputs
 wire [3:0] alu_op;
 wire [2:0] addr1;
 wire [2:0] addr2;
 wire show,write;
 
+//register bank outputs
 wire [7:0] r1;
 wire [7:0] r2;
 
@@ -172,7 +174,6 @@ SevenSegDriver seven_seg(
    .clk(clk_5),
    .seg_data(o_SEGData),
    .seg_latch(o_SEGLatch)
-	//.temp(led2)
 	);
 
 dipReader dipReader(
@@ -238,6 +239,7 @@ Alu alu(
     .in1(r1),
     .in2(r2),
     .op(alu_op),
+	 .clock(clock),
     .res(res),
     .CF(CF),
     .ZF(ZF),

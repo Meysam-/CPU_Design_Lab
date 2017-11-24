@@ -22,6 +22,7 @@ module Alu(
     input [7:0] in1,
     input [7:0] in2,
     input [3:0] op,
+	 input clock,
     output reg [7:0] res,
     output reg CF,
     output reg ZF,
@@ -39,20 +40,26 @@ module Alu(
 	 
 	 always @(in1,in2,op) begin
 		case(op)
-			4'b0000: begin
-				add_res = in1 + in2;
-				res = add_res[7:0];
-				CF = add_res[8];
-				ZF = ((res == 0)? 1'b1: 1'b0);
-				SF = add_res[7];
-				if(in1[7] & in2[7] & (!res[7])) 
-					OF = 1'b1;
-				else if((!in1[7]) & (!in2[7]) & (res[7]))
-					OF = 1'b1;
-				else
-					OF = 1'b0;
+			4'b0000: begin // NOP instruction
 			end
-			4'b1111: begin
+			
+			4'b0001: begin //ADD instruction
+				if(!clock) begin
+					add_res = in1 + in2;
+					res = add_res[7:0];
+					CF = add_res[8];
+					ZF = ((res == 0)? 1'b1: 1'b0);
+					SF = add_res[7];
+					if(in1[7] & in2[7] & (!res[7])) 
+						OF = 1'b1;
+					else if((!in1[7]) & (!in2[7]) & (res[7]))
+						OF = 1'b1;
+					else
+						OF = 1'b0;
+				end
+			end
+			
+			4'b1111: begin //SHOWR instruction
 				res = in1;
 			end
 		endcase

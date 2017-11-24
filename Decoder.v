@@ -36,7 +36,7 @@ module Decoder(
 				9'b000_000_001: begin //ADD
 					write = 1'b1;
 					show = 1'b0;
-					alu_op = 4'b0000;
+					alu_op = 4'b0001;
 				end
 				9'b000_010_010: begin //SHOW
 					write = 1'b0;
