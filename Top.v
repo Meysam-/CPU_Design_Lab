@@ -131,7 +131,7 @@ wire [7:0] res;
 wire CF,ZF,SF,OF;
 
 //Decoder outputs and ALU inputs
-wire [3:0] alu_op;
+wire [4:0] alu_op;
 wire [2:0] addr1;
 wire [2:0] addr2;
 wire show,write;
@@ -191,7 +191,7 @@ dipReader dipReader(
 
 always begin
 	led[15:12] = {CF,ZF,SF,OF};
-	led[11:8] = alu_op;
+	led[11:8] = alu_op[3:0];
 	//led[7:0] = ((show)? res : 8'b0000_0000);
 	led[7:0] = r1;
 end
@@ -238,6 +238,7 @@ reg_bank rb(
 Alu alu(
     .in1(r1),
     .in2(r2),
+	 .im(addr2),
     .op(alu_op),
 	 .clock(clock),
     .res(res),
