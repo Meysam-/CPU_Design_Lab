@@ -144,60 +144,72 @@ module Alu(
 			end
 			
 			5'b01001: begin //SAR (shift arithmatic right)
-				temp[7:0] = in1;
-				temp[15:8] = {8{in1[7]}};
-				temp = temp >> im;
-				res = temp[7:0];
-				CF = in1[im];
-				OF = 1'b0;
-				ZF = ((res == 0)? 1'b1: 1'b0);
-				SF = res[7];
+				if(!clock) begin
+					temp[7:0] = in1;
+					temp[15:8] = {8{in1[7]}};
+					temp = temp >> im;
+					res = temp[7:0];
+					CF = in1[im];
+					OF = 1'b0;
+					ZF = ((res == 0)? 1'b1: 1'b0);
+					SF = res[7];
+				end
 			end
 				
 			5'b01010: begin //SLR (shift logical right)
-				res = in1 >> im;
-				CF = in1[im];
-				OF = ((in1[7] == 0)? 1'b0 : 1'b1);
-				ZF = ((res == 0)? 1'b1 : 1'b0);
-				SF = res[7];
+				if(!clock) begin
+					res = in1 >> im;
+					CF = in1[im];
+					OF = ((in1[7] == 0)? 1'b0 : 1'b1);
+					ZF = ((res == 0)? 1'b1 : 1'b0);
+					SF = res[7];
+				end
 			end
 			
 			5'b01011: begin //SAL (shift arithmatic left)
-				res = in1 << im;
-				CF = in1[8 - im];
-				OF = ((in1[7] == res[7])? 1'b0 : 1'b1);
-				ZF = ((res == 0)? 1'b1 : 1'b0);
-				SF = res[7];
+				if(!clock) begin
+					res = in1 << im;
+					CF = in1[8 - im];
+					OF = ((in1[7] == res[7])? 1'b0 : 1'b1);
+					ZF = ((res == 0)? 1'b1 : 1'b0);
+					SF = res[7];
+				end
 			end
 			
 			5'b01100: begin //SLL (shift logical left)
-				res = in1 << im;
-				CF = in1[8 - im];
-				OF = ((in1[7] == res[7])? 1'b0 : 1'b1);
-				ZF = ((res == 0)? 1'b1 : 1'b0);
-				SF = res[7];
+				if(!clock) begin
+					res = in1 << im;
+					CF = in1[8 - im];
+					OF = ((in1[7] == res[7])? 1'b0 : 1'b1);
+					ZF = ((res == 0)? 1'b1 : 1'b0);
+					SF = res[7];
+				end
 			end
 			
 			5'b01101: begin //ROL (rotate left)
-				temp[7:0] = in1;
-				temp[15:8] = in1;
-				temp = temp << im;
-				res = temp[15:8];
-				CF = in1[8 - im];
-				OF = ((in1[7] == res[7])? 1'b0 : 1'b1);
-				ZF = ((res == 0)? 1'b1 : 1'b0);
-				SF = res[7];
+				if(!clock) begin
+					temp[7:0] = in1;
+					temp[15:8] = in1;
+					temp = temp << im;
+					res = temp[15:8];
+					CF = in1[8 - im];
+					OF = ((in1[7] == res[7])? 1'b0 : 1'b1);
+					ZF = ((res == 0)? 1'b1 : 1'b0);
+					SF = res[7];
+				end
 			end
 			
 			5'b01110: begin //ROR (rotate right)
-				temp[7:0] = in1;
-				temp[15:8] = in1;
-				temp = temp >> im;
-				res = temp[7:0];
-				CF = in1[im];
-				OF = ((in1[7] == res[7])? 1'b0 : 1'b1);
-				ZF = ((res == 0)? 1'b1 : 1'b0);
-				SF = res[7];
+				if(!clock) begin
+					temp[7:0] = in1;
+					temp[15:8] = in1;
+					temp = temp >> im;
+					res = temp[7:0];
+					CF = in1[im];
+					OF = ((in1[7] == res[7])? 1'b0 : 1'b1);
+					ZF = ((res == 0)? 1'b1 : 1'b0);
+					SF = res[7];
+				end
 			end
 		
 			5'b11111: begin //SHOWR instruction
