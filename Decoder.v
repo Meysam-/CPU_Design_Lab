@@ -33,6 +33,11 @@ module Decoder(
 			addr1 = instr[5:3];
 			
 			case(instr[14:6])
+				9'b000_000_000: begin
+					write = 1'b0;
+					show = 1'b0;
+					alu_op = 4'b0000;
+				end
 				9'b000_000_001: begin //ADD
 					write = 1'b1;
 					show = 1'b0;
