@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
@@ -25,54 +26,47 @@ module Alu(
     input [4:0] op,
 	 input clock,
     output reg [7:0] res,
-    output CF,
-    output ZF,
-    output SF,
-    output OF
+    output reg CF,
+    output reg ZF,
+    output reg SF,
+    output reg OF
     );
 	 reg [8:0] add_res;
-	 reg [3:0] pre_flags;
-	 reg CF;
-	 reg ZF;
-	 reg SF;
-	 reg OF;
+	 reg CF_;
+	 reg ZF_;
+	 reg SF_;
+	 reg OF_;
 	 
-	 /*
 	 initial begin
-		CF = 1'b0;
-		ZF = 1'b0;
-		SF = 1'b0;
-		OF = 1'b0;
+		CF_ = 1'b0;
+		ZF_ = 1'b0;
+		SF_ = 1'b0;
+		OF_ = 1'b0;
 	 end
-	 */
+	 
 	 
 	 always @(in1,in2,op) begin
-	 pre_flags = {CF,ZF,SF,OF};
 		case(op)
 			5'b00000: begin // NOP instruction
-				CF = 1'b1;
-				ZF = 1'b1;
-				SF = 1'b1;
-				OF = 1'b1;
+				{CF_,ZF_,SF_,OF_} = {CF,ZF,SF,OF};
 			end
 			
 			5'b00001: begin //ADD instruction
 				if(!clock) begin
 					add_res = in1 + in2;
 					res = add_res[7:0];
-					CF = add_res[8];
-					ZF = ((add_res[7:0] == 0)? 1'b1: 1'b0);
-					SF = add_res[7];
+					CF_ = add_res[8];
+					ZF_ = ((add_res[7:0] == 0)? 1'b1: 1'b0);
+					SF_ = add_res[7];
 					if(in1[7] & in2[7] & (!add_res[7])) 
-						OF = 1'b1;
+						OF_ = 1'b1;
 					else if((!in1[7]) & (!in2[7]) & (add_res[7]))
-						OF = 1'b1;
+						OF_ = 1'b1;
 					else
 						OF = 1'b0;
 				end
 			end
 			
-<<<<<<< 9ce95b9ef5ab52fd09631d1e5f323ef263ae8269
 			5'b00010: begin //AND instruction
 				if(!clock) begin
 					res = in1 & in2;
@@ -92,7 +86,7 @@ module Alu(
 					ZF = ((res == 0)? 1'b1: 1'b0);
 					SF = add_res[7];
 					if(in1[7] & in2[7] & (!res[7])) 
-						OF = 1'b1;
+						OF_ = 1'b0;
 					else if((!in1[7]) & (!in2[7]) & (res[7]))
 						OF = 1'b1;
 					else
