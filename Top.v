@@ -235,18 +235,19 @@ reg_bank rb(
     .out2(r2)
 );
 
+
 Alu alu(
-    .in1(r1),
-    .in2(r2),
-	 .im(addr2),
-    .op(alu_op),
-	 .clock(clock),
-    .res(res),
-    .CF(CF),
-    .ZF(ZF),
-    .SF(SF),
-    .OF(OF)
-    );
+   .in1(r1),
+   .in2(r2),
+   .im(addr2),
+   .op(alu_op),
+   .clock(clock),
+   .res(res),
+   .CF(CF),
+   .ZF(ZF),
+   .SF(SF),
+   .OF(OF)
+);	 
 
 endmodule
 

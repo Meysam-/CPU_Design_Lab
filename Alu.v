@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
@@ -32,6 +31,7 @@ module Alu(
     output reg OF
     );
 	 reg [8:0] add_res;
+	 reg [15:0] temp;
 	 reg CF_;
 	 reg ZF_;
 	 reg SF_;
@@ -63,17 +63,17 @@ module Alu(
 					else if((!in1[7]) & (!in2[7]) & (add_res[7]))
 						OF_ = 1'b1;
 					else
-						OF = 1'b0;
+						OF_ = 1'b0;
 				end
 			end
 			
 			5'b00010: begin //AND instruction
 				if(!clock) begin
 					res = in1 & in2;
-					CF = 1'b0;
-					OF = 1'b0;
-					ZF = ((res == 0)? 1'b1: 1'b0);
-					SF = res[7];
+					CF_ = 1'b0;
+					OF_ = 1'b0;
+					ZF_ = ((res == 0)? 1'b1: 1'b0);
+					SF_ = res[7];
 				end
 			end
 			
@@ -82,39 +82,40 @@ module Alu(
 					temp[7:0] = (-1) * in2;
 					add_res = in1 + temp[7:0];
 					res = add_res[7:0];
-					CF = add_res[8];
-					ZF = ((res == 0)? 1'b1: 1'b0);
-					SF = add_res[7];
+					CF_ = add_res[8];
+					ZF_ = ((res == 0)? 1'b1: 1'b0);
+					SF_ = add_res[7];
 					if(in1[7] & in2[7] & (!res[7])) 
 						OF_ = 1'b0;
 					else if((!in1[7]) & (!in2[7]) & (res[7]))
-						OF = 1'b1;
+						OF_ = 1'b1;
 					else
-						OF = 1'b0;
+						OF_ = 1'b0;
 				end
 			end
 			
 			5'b00100: begin //OR instruction
 				if(!clock) begin
 					res = in1 | in2;
-					CF = 1'b0;
-					OF = 1'b0;
-					ZF = ((res == 0)? 1'b1: 1'b0);
-					SF = res[7];
+					CF_ = 1'b0;
+					OF_ = 1'b0;
+					ZF_ = ((res == 0)? 1'b1: 1'b0);
+					SF_ = res[7];
 				end
 			end
 			
 			5'b00101: begin //XOR instruction
 				if(!clock) begin
 					res = in1 ^ in2;
-					CF = 1'b0;
-					OF = 1'b0;
-					ZF = ((res == 0)? 1'b1: 1'b0);
-					SF = res[7];
+					CF_ = 1'b0;
+					OF_ = 1'b0;
+					ZF_ = ((res == 0)? 1'b1: 1'b0);
+					SF_ = res[7];
 				end
 			end
 			
 			5'b00110: begin //MOV instruction
+				{CF_,ZF_,SF_,OF_} = {CF,ZF,SF,OF};
 				if(!clock) begin
 					res = in2;
 				end
@@ -125,28 +126,31 @@ module Alu(
 					if(CF) begin // have carry
 						add_res = in1 + 1;
 						res = add_res[7:0];
-						CF = add_res[8];
-						ZF = ((res == 0)? 1'b1: 1'b0);
-						SF = add_res[7];
+						CF_ = add_res[8];
+						ZF_ = ((res == 0)? 1'b1: 1'b0);
+						SF_ = add_res[7];
 						if(in1[7] & in2[7] & (!res[7])) 
-							OF = 1'b1;
+							OF_ = 1'b1;
 						else if((!in1[7]) & (!in2[7]) & (res[7]))
-							OF = 1'b1;
+							OF_ = 1'b1;
 						else
-							OF = 1'b0;
+							OF_ = 1'b0;
 					end
 					else begin // no carry
 						res = in1;
-						CF = 1'b0;
-						ZF = ((res == 0)? 1'b1: 1'b0);
-						SF = res[7];
-						OF = 1'b0;
+						CF_ = 1'b0;
+						ZF_ = ((res == 0)? 1'b1: 1'b0);
+						SF_ = res[7];
+						OF_ = 1'b0;
 					end
 				end
 			end
 			
 			5'b01000: begin //NOT instruction
-				res = ~in1;
+				{CF_,ZF_,SF_,OF_} = {CF,ZF,SF,OF};
+				if(!clock) begin
+					res = ~in1;
+				end
 			end
 			
 			5'b01001: begin //SAR (shift arithmatic right)
@@ -155,40 +159,40 @@ module Alu(
 					temp[15:8] = {8{in1[7]}};
 					temp = temp >> im;
 					res = temp[7:0];
-					CF = in1[im];
-					OF = 1'b0;
-					ZF = ((res == 0)? 1'b1: 1'b0);
-					SF = res[7];
+					CF_ = in1[im];
+					OF_ = 1'b0;
+					ZF_ = ((res == 0)? 1'b1: 1'b0);
+					SF_ = res[7];
 				end
 			end
 				
 			5'b01010: begin //SLR (shift logical right)
 				if(!clock) begin
 					res = in1 >> im;
-					CF = in1[im];
-					OF = ((in1[7] == 0)? 1'b0 : 1'b1);
-					ZF = ((res == 0)? 1'b1 : 1'b0);
-					SF = res[7];
+					CF_ = in1[im];
+					OF_ = ((in1[7] == 0)? 1'b0 : 1'b1);
+					ZF_ = ((res == 0)? 1'b1 : 1'b0);
+					SF_ = res[7];
 				end
 			end
 			
 			5'b01011: begin //SAL (shift arithmatic left)
 				if(!clock) begin
 					res = in1 << im;
-					CF = in1[8 - im];
-					OF = ((in1[7] == res[7])? 1'b0 : 1'b1);
-					ZF = ((res == 0)? 1'b1 : 1'b0);
-					SF = res[7];
+					CF_ = in1[8 - im];
+					OF_ = ((in1[7] == res[7])? 1'b0 : 1'b1);
+					ZF_ = ((res == 0)? 1'b1 : 1'b0);
+					SF_ = res[7];
 				end
 			end
 			
 			5'b01100: begin //SLL (shift logical left)
 				if(!clock) begin
 					res = in1 << im;
-					CF = in1[8 - im];
-					OF = ((in1[7] == res[7])? 1'b0 : 1'b1);
-					ZF = ((res == 0)? 1'b1 : 1'b0);
-					SF = res[7];
+					CF_ = in1[8 - im];
+					OF_ = ((in1[7] == res[7])? 1'b0 : 1'b1);
+					ZF_ = ((res == 0)? 1'b1 : 1'b0);
+					SF_ = res[7];
 				end
 			end
 			
@@ -198,10 +202,10 @@ module Alu(
 					temp[15:8] = in1;
 					temp = temp << im;
 					res = temp[15:8];
-					CF = in1[8 - im];
-					OF = ((in1[7] == res[7])? 1'b0 : 1'b1);
-					ZF = ((res == 0)? 1'b1 : 1'b0);
-					SF = res[7];
+					CF_ = in1[8 - im];
+					OF_ = ((in1[7] == res[7])? 1'b0 : 1'b1);
+					ZF_ = ((res == 0)? 1'b1 : 1'b0);
+					SF_ = res[7];
 				end
 			end
 			
@@ -211,17 +215,22 @@ module Alu(
 					temp[15:8] = in1;
 					temp = temp >> im;
 					res = temp[7:0];
-					CF = in1[im];
-					OF = ((in1[7] == res[7])? 1'b0 : 1'b1);
-					ZF = ((res == 0)? 1'b1 : 1'b0);
-					SF = res[7];
+					CF_ = in1[im];
+					OF_ = ((in1[7] == res[7])? 1'b0 : 1'b1);
+					ZF_ = ((res == 0)? 1'b1 : 1'b0);
+					SF_ = res[7];
 				end
 			end
 		
 			5'b11111: begin //SHOWR instruction
+				{CF_,ZF_,SF_,OF_} = {CF,ZF,SF,OF};
 				res = in1;
 			end
 		endcase
+	 end
+	 
+	 always @(posedge clock) begin
+		{CF,ZF,SF,OF} = {CF_,ZF_,SF_,OF_};
 	 end
 
 endmodule
