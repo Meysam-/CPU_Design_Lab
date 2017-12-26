@@ -23,6 +23,7 @@ module Decoder(
     output reg [4:0] alu_op,
     output reg [2:0] addr1,
     output reg [2:0] addr2,
+	 output reg [7:0] im8,
     output reg show,
     output reg write
     );
@@ -33,7 +34,7 @@ module Decoder(
 			addr1 = instr[5:3];
 			
 			case(instr[14:6])
-				9'b000_000_000: begin
+				9'b000_000_000: begin // Nope
 					write = 1'b0;
 					show = 1'b0;
 					alu_op = 4'b0000;
@@ -115,18 +116,103 @@ module Decoder(
 					alu_op = 5'b01110;
 				end
 				
+				9'b000_001_111: begin //INC
+					write = 1'b1;
+					show = 1'b0;
+					alu_op = 5'b01111;
+				end
+				
+				9'b000_010_000: begin //DEC
+					write = 1'b1;
+					show = 1'b0;
+					alu_op = 5'b10000;
+				end
+				
+				
 				9'b000_010_010: begin //ShowR
 					write = 1'b0;
 					show = 1'b1;
 					alu_op = 5'b11111;
 				end
 				
+				9'b000_010_011: begin //ShowRR
+					write = 1'b0;
+					show = 1'b1;
+					alu_op = 5'b10011;
+				end
+				
+				9'b000_010_100: begin //Load Dip R
+					write = 1'b1;
+					show = 1'b0;
+					alu_op = 5'b10100;
+				end
+				
+				9'b000_010_101: begin //Load Dip R R
+					write = 1'b1;
+					show = 1'b0;
+					alu_op = 5'b10101;
+				end
+				
+				9'b000_010_110: begin //CMP (compare registers)
+					write = 1'b0;
+					show = 1'b0;
+					alu_op = 5'b10110;
+				end
+
+				
 			endcase
 			
 		end
-		else begin
-			// second type instructions here
+		
+		else begin // second type instructions
+			im8 = instr[7:0];
+			addr1 = instr[10:8];
+			case(instr[14:11])
+				4'b0000: begin // JE condition ZF = 1
+					write = 1'b0;
+					show = 1'b0;
+					alu_op = 5'b11000;
+				end
+				
+				4'b0001: begin // JB condition CF = 1
+					write = 1'b0;
+					show = 1'b0;
+					alu_op = 5'b11001;
+				end
+				
+				4'b0010: begin // JA condition ZF = 1 & CF = 1
+					write = 1'b0;
+					show = 1'b0;
+					alu_op = 5'b11010;
+				end
+				
+				4'b0011: begin // JL condition SF != OF
+					write = 1'b0;
+					show = 1'b0;
+					alu_op = 5'b11011;
+				end
+				
+				4'b0100: begin // JG condition SF=OF & ZF=0
+					write = 1'b0;
+					show = 1'b0;
+					alu_op = 5'b11100;
+				end
+				
+				4'b0101: begin // JMP condition SF != OF
+					write = 1'b0;
+					show = 1'b0;
+					alu_op = 5'b11101;
+				end
+				
+				4'b0110: begin // LI load imidiate
+					write = 1'b1;
+					show = 1'b0;
+					alu_op = 5'b11110;
+				end
+				
+			endcase
 		end
+		
 	 end
 
 endmodule

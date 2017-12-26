@@ -128,17 +128,21 @@ wire [15:0] IR;
 
 //ALU outputs
 wire [7:0] res;
-wire CF,ZF,SF,OF;
+wire CF,ZF,SF,OF,jmp;
 
 //Decoder outputs and ALU inputs
 wire [4:0] alu_op;
 wire [2:0] addr1;
 wire [2:0] addr2;
+wire [7:0] im8; //8 bit immidiate for second type instr
 wire show,write;
 
 //register bank outputs
 wire [7:0] r1;
 wire [7:0] r2;
+
+//DIP reader output
+wire [15:0] dip_data;
 
 
 initial begin
@@ -146,10 +150,17 @@ initial begin
 end
 
 always @(negedge clock or negedge reset) begin
-	if(!reset)
+	if(!reset) begin
 		PC = 16'b0000_0000_0000_0000;
-	else
-		PC = PC + 1;
+	end
+	else begin
+		if(!jmp) begin
+			PC = PC + 1;
+		end
+		else begin
+			PC = res;
+		end
+	end
 end
 
 
@@ -179,7 +190,7 @@ SevenSegDriver seven_seg(
 dipReader dipReader(
 	.clk(clk_5),
 	.DIP_in(i_DIPData),
-	.DIP_data(),
+	.DIP_data(dip_data),
 	.DIP_latch(o_DIPLatch),
 	.s3(s3),
 	.s4(s4),
@@ -220,6 +231,7 @@ Decoder dcd(
     .alu_op(alu_op),
     .addr1(addr1),
     .addr2(addr2),
+	 .im8(im8),
     .show(show),
     .write(write)
     );
@@ -240,9 +252,12 @@ Alu alu(
    .in1(r1),
    .in2(r2),
    .im(addr2),
+	.im8(im8),
+	.dip_data(dip_data),
    .op(alu_op),
    .clock(clock),
    .res(res),
+	.jmp(jmp),
    .CF(CF),
    .ZF(ZF),
    .SF(SF),
