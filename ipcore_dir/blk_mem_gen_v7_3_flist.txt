@@ -2,7 +2,6 @@
 _xmsgs\pn_parser.xmsgs
 blk_mem_gen_v7_3.asy
 blk_mem_gen_v7_3.gise
-blk_mem_gen_v7_3.mif
 blk_mem_gen_v7_3.ngc
 blk_mem_gen_v7_3.sym
 blk_mem_gen_v7_3.v
@@ -28,6 +27,8 @@ blk_mem_gen_v7_3\simulation\blk_mem_gen_v7_3_synth.vhd
 blk_mem_gen_v7_3\simulation\blk_mem_gen_v7_3_tb.vhd
 blk_mem_gen_v7_3\simulation\bmg_stim_gen.vhd
 blk_mem_gen_v7_3\simulation\bmg_tb_pkg.vhd
+blk_mem_gen_v7_3\simulation\checker.vhd
+blk_mem_gen_v7_3\simulation\data_gen.vhd
 blk_mem_gen_v7_3\simulation\functional\simcmds.tcl
 blk_mem_gen_v7_3\simulation\functional\simulate_isim.bat
 blk_mem_gen_v7_3\simulation\functional\simulate_mti.bat

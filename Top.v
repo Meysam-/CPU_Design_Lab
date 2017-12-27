@@ -201,10 +201,13 @@ dipReader dipReader(
 
 
 always begin
-	led[15:12] = {CF,ZF,SF,OF};
-	led[11:8] = alu_op[3:0];
+	//led[15:12] = {CF,ZF,SF,OF};
+	//led[11:8] = alu_op[3:0];
 	//led[7:0] = ((show)? res : 8'b0000_0000);
-	led[7:0] = r1;
+	if(show) 
+		led[7:0] = r1;
+	else
+		led[7:0] = 8'd0;
 end
 
 LED_driver ledDriver(

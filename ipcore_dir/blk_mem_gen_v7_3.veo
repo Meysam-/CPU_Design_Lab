@@ -49,7 +49,9 @@
 //----------- Begin Cut here for INSTANTIATION Template ---// INST_TAG
 blk_mem_gen_v7_3 your_instance_name (
   .clka(clka), // input clka
-  .addra(addra), // input [7 : 0] addra
+  .wea(wea), // input [0 : 0] wea
+  .addra(addra), // input [3 : 0] addra
+  .dina(dina), // input [15 : 0] dina
   .douta(douta) // output [15 : 0] douta
 );
 // INST_TAG_END ------ End INSTANTIATION Template ---------

@@ -45,7 +45,6 @@
 # THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 # PART OF THIS FILE AT ALL TIMES.
 #--------------------------------------------------------------------------------
-cp ../../../blk_mem_gen_v7_3.mif .
 
 
 mkdir work
@@ -56,7 +55,10 @@ ncvhdl -v93 -work work ../../example_design/blk_mem_gen_v7_3_exdes.vhd
 echo "Compiling Test Bench Files"
 
 ncvhdl -v93 -work work    ../bmg_tb_pkg.vhd
+ncvhdl -v93 -work work    ../random.vhd
+ncvhdl -v93 -work work    ../data_gen.vhd
 ncvhdl -v93 -work work    ../addr_gen.vhd
+ncvhdl -v93 -work work    ../checker.vhd
 ncvhdl -v93 -work work    ../bmg_stim_gen.vhd
 ncvhdl -v93 -work work    ../blk_mem_gen_v7_3_synth.vhd 
 ncvhdl -v93 -work work    ../blk_mem_gen_v7_3_tb.vhd

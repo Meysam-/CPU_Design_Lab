@@ -45,7 +45,6 @@
 :: PART OF THIS FILE AT ALL TIMES.
 ::--------------------------------------------------------------------------------
 
-cp ..\..\..\blk_mem_gen_v7_3.mif .
 
 
 echo "Compiling Core Verilog UNISIM/Behavioral model"
@@ -55,7 +54,10 @@ vhpcomp -work work ..\..\example_design\blk_mem_gen_v7_3_exdes.vhd
 echo "Compiling Test Bench Files"
 
 vhpcomp -work work    ..\bmg_tb_pkg.vhd
+vhpcomp -work work    ..\random.vhd
+vhpcomp -work work    ..\data_gen.vhd
 vhpcomp -work work    ..\addr_gen.vhd
+vhpcomp -work work    ..\checker.vhd
 vhpcomp -work work    ..\bmg_stim_gen.vhd
 vhpcomp -work work    ..\blk_mem_gen_v7_3_synth.vhd 
 vhpcomp -work work    ..\blk_mem_gen_v7_3_tb.vhd
